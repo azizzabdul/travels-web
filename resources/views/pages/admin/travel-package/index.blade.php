@@ -18,6 +18,7 @@
                 <table class="table table-bordered" widht="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <td>NO</td>
                             <td>ID</td>
                             <td>Title</td>
                             <td>Location</td>
@@ -28,8 +29,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                       @php $no = 1; @endphp
                        @forelse ($items as $item)
+                        
                             <tr>
+                                <td>{{ $no++ }}</td>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->location }}</td>
