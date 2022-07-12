@@ -506,3 +506,47 @@ header {
     }
 }
 
+// form-login
+.login-container{
+    @media (min-height: 992px){
+        background: linear-gradient(90deg, #ffffff 60%, #811b1b 40%);
+        width: 100vw;
+        height: 100vh;
+
+    }
+}
+
+.page-login{
+    height: 100vh;
+    
+    .btn-login{
+        background-color: #f38938;
+        color: white;
+
+        &:hover{
+            background-color: #f09855;
+            color: white;
+        }
+    }
+
+    .section-left{
+        h1 {
+            font-family: 'Playfair Display';
+                font-weight: bold;
+                font-size: 50px;
+                text-align: left;
+                color: #001A70;
+        }
+    }
+
+    .section-right{
+        a {
+            font-family: 'Assistant';
+            font-weight: 300;
+            text-decoration: underline;
+            font-size: 16px;
+            text-align: center;
+            color: #b1b1b1;
+        }
+    }
+}

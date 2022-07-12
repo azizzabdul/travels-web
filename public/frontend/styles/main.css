@@ -383,4 +383,39 @@ header .btn-getstarted:hover {
 .section-success .btn-homepage:hover {
   background-color: #0e32a8;
   color: white;
+}
+
+@media (min-height: 992px) {
+  .login-container {
+    background: linear-gradient(90deg, #ffffff 60%, #811b1b 40%);
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.page-login {
+  height: 100vh;
+}
+.page-login .btn-login {
+  background-color: #f38938;
+  color: white;
+}
+.page-login .btn-login:hover {
+  background-color: #f09855;
+  color: white;
+}
+.page-login .section-left h1 {
+  font-family: "Playfair Display";
+  font-weight: bold;
+  font-size: 50px;
+  text-align: left;
+  color: #001A70;
+}
+.page-login .section-right a {
+  font-family: "Assistant";
+  font-weight: 300;
+  text-decoration: underline;
+  font-size: 16px;
+  text-align: center;
+  color: #b1b1b1;
 }/*# sourceMappingURL=main.css.map */

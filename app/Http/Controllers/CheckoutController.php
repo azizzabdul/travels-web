@@ -33,11 +33,11 @@ class CheckoutController extends Controller
         ]);
 
         TransactionDetail::create([
-            'transaction_id' => $transaction->id,
+            'transactions_id' => $transaction->id,
             'username' => Auth::user()->username,
             'nationality' => 'ID',
             'is_visa' => false,
-            'doe_passport' => Carbon::now()->addYear(5)
+            'doe_passport' => Carbon::now()->addYears(5)
         ]);
 
     return redirect()->route('checkout', $transaction->id);
@@ -48,21 +48,20 @@ class CheckoutController extends Controller
     {
         $item = TransactionDetail::findOrFail($detail_id);
 
-        $transaction = Transaction::with(['details', 'travel_package'])->findOrFail($item->transaction_id);
+        $transaction = Transaction::with(['details', 'travel_package'])->findOrFail($item->transactions_id);
 
         if ($item->is_visa) {
-            $transaction->transaction_total -=190;
-            $transaction->transaction_status -= 190;
+            $transaction->transaction_total -= 190;
+            $transaction->additional_visa -= 190;
         }
 
-        $transaction->transaction_total -=
-        $transaction->travel_package->price;
+        $transaction->transaction_total -= $transaction->travel_package->price;
 
         $transaction->save();
 
         $item->delete();
 
-        return redirect('checkout', $item->transaction_id);
+        return redirect()->route('checkout', $item->transactions_id);
 
     }
 
@@ -75,20 +74,19 @@ class CheckoutController extends Controller
         ]);
 
         $data = $request->all();
-        $data['transaction_id'] = $id;
+        $data['transactions_id'] = $id;
 
-        Transaction::create($data);
+        TransactionDetail::create($data);
 
         $transaction = Transaction::with(['travel_package'])->find($id);
 
-        if($request->id_visa)
+        if($request->is_visa)
         {
             $transaction->transaction_total += 190;
-            $transaction->transaction_visa += 190;
+            $transaction->additional_visa += 190;
         }
 
-        $transaction->transaction_total +=
-        $transaction->travel_package->price;
+        $transaction->transaction_total += $transaction->travel_package->price;
 
         $transaction->save();
 
