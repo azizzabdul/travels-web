@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Carbon\Carbon;
-use App\Models\Transaction;
 
+use Midtrans\Snap;
+use Midtrans\Config;
+use App\Models\Transaction;
+use GuzzleHttp\Psr7\Header;
 use Illuminate\Http\Request;
 use App\Models\TravelPackage;
+// use Illuminate\Support\Facades\Config;
 use App\Mail\TransactionSuccess;
+
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -104,6 +110,41 @@ class CheckoutController extends Controller
 
         $transaction->save();
 
+        //configurasi Midtrans
+        // Config::$serverKey = config('midtrans.serverKey');
+        // Config::$isProduction = config('midtrans.isProduction');
+        // Config::$isSanitized = config('midtrans.isSanitized');
+        // Config::$is3ds = config('midtrans.id3ds');
+
+        // //buat array untuk dikerim ke Midtrans
+        // $midtrans_params = [
+        //     'transaction_details' => [
+        //         'order_id' => 'Travels-' . $transaction->id,
+        //         'gross_amount' => (int) $transaction->transaction_total
+
+        //     ],
+            
+        //     'customer_details' => [
+        //         'first_name' => $transaction->user->name,
+        //         'email' => $transaction->user->email
+
+        //     ],
+
+        //     'enabled_payment' => ['gopay'],
+        //     'vtweb' => []
+        // ];
+
+        //     try {
+        //         // ambil halaman payment midtrans
+        //         $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
+
+        //         // redirect ke halaman midtrans
+        //         Header('Location: ' . $paymentUrl);
+
+        //     } catch (Exception $e) {
+        //         echo $e->getMessage();
+        //     }
+
         // return $transaction;
 
         // kirim email ke user e-tiket
@@ -113,4 +154,6 @@ class CheckoutController extends Controller
 
         return view('pages.success');
     }
+
+
 }

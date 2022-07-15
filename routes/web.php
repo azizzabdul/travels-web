@@ -62,3 +62,9 @@ Auth::routes([
     'verify' => TRUE
 ]);
 
+// Midtrans
+Route::post('/midtrans/callback','MidtransController@notificationHandler');
+Route::get('/midtrans/finish','MidtransController@finishRedirect');
+Route::get('/midtrans/unfinish','MidtransController@unfinishRedirect');
+Route::get('/midtrans/error','MidtransController@errorRedirect');
+
